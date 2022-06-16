@@ -1,9 +1,7 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movie_booking_app/screens/screens.dart';
 import 'package:movie_booking_app/utils/utils.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -31,15 +29,15 @@ class _SplashScreenState extends State<SplashScreen>
     );
     _animationController.forward();
 
-    Timer(
-      const Duration(milliseconds: 2500),
-      () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => const LoginScreen(),
-        ),
-      ),
-    );
+    // Timer(
+    //   const Duration(milliseconds: 2500),
+    //   () => Navigator.pushReplacement(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (_) => const LoginScreen(),
+    //     ),
+    //   ),
+    // );
     super.initState();
   }
 

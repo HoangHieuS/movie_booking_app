@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:movie_booking_app/controllers/controllers.dart';
 import 'package:movie_booking_app/utils/utils.dart';
 import 'package:movie_booking_app/widgets/widgets.dart';
 
@@ -13,17 +15,22 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final cnfPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return Scaffold(
       backgroundColor: ThemeColor.splash,
       resizeToAvoidBottomInset: false,
       body: SizedBox(
-        width: _size.width,
-        height: _size.height,
+        width: size.width,
+        height: size.height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -32,7 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               padding: const EdgeInsets.all(19),
-              width: _size.width,
+              width: size.width,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
@@ -49,23 +56,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const CustomTextField(
+                  CustomTextField(
+                    controller: nameController,
                     hintText: 'Name',
                     isFirst: true,
                   ),
-                  const CustomTextField(hintText: 'Email Address'),
-                  const CustomTextField(
+                  CustomTextField(
+                    controller: emailController,
+                    hintText: 'Email Address',
+                  ),
+                  CustomTextField(
+                    controller: passwordController,
                     hintText: 'Password',
                     isPassword: true,
                   ),
-                  const CustomTextField(
+                  CustomTextField(
+                    controller: cnfPasswordController,
                     hintText: 'Confirm Password',
                     isPassword: true,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (ValidController.validateField(
+                                'Name', nameController.text.trim()) &&
+                            ValidController.validateField(
+                                'Email', emailController.text.trim())) {
+                          if (ValidController.validatePassword(
+                              passwordController.text,
+                              cnfPasswordController.text)) {
+                            AuthController.instance.registerUser(
+                                  emailController.text.trim(),
+                                  passwordController.text.trim(),
+                                );
+                          }
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: ThemeColor.splash,
                         shape: RoundedRectangleBorder(
@@ -76,7 +103,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Padding(
                           padding: EdgeInsets.all(12),
                           child: Text(
-                            'SIGN UP',
+                            'SIGNUP',
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
@@ -149,7 +176,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Navigator.pop(context);
+                          Get.back();
                         }),
                   const TextSpan(text: ' here.'),
                 ],
