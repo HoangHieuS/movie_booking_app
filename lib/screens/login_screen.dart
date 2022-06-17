@@ -17,6 +17,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
+  final forgotEmailController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
@@ -85,7 +86,45 @@ class _LoginScreenState extends State<LoginScreen> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.defaultDialog(
+                          title: 'Forgot Password?',
+                          content: CustomTextField(
+                            hintText: 'Email address',
+                            controller: forgotEmailController,
+                          ),
+                          radius: 10,
+                          onWillPop: () {
+                            forgotEmailController.text = '';
+                            return Future.value(true);
+                          },
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          confirm: ElevatedButton(
+                            onPressed: () {
+                              AuthController.instance.forgotPassword(
+                                  forgotEmailController.text.trim());
+                              forgotEmailController.text = '';
+                              Get.back();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: ThemeColor.splash,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            child: const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(12),
+                                child: Text(
+                                  'Send Reset Mail',
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                       child: const Text(
                         'Forgot Password?',
                         style: TextStyle(

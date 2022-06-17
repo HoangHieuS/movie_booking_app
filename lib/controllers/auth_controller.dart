@@ -10,7 +10,7 @@ class AuthController extends GetxController {
   static AuthController instance = Get.find();
   late Rx<User?> _user;
   bool isLoging = false;
-
+  User? get user => _user.value;
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
@@ -38,12 +38,13 @@ class AuthController extends GetxController {
     );
   }
 
-  void registerUser(email, password) async {
+  void register(email, password) async {
     try {
       isLoging = true;
       update();
       await auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      getSuccessSnackBar("Create account success");
     } on FirebaseAuthException catch (e) {
       getErrorSnackBar('Account Creating Failed', e);
     }
@@ -54,6 +55,7 @@ class AuthController extends GetxController {
       isLoging = true;
       update();
       await auth.signInWithEmailAndPassword(email: email, password: password);
+      getSuccessSnackBar("Successfully logged in as ${_user.value!.email}");
     } on FirebaseAuthException catch (e) {
       getErrorSnackBar('Login Failed', e);
     }
@@ -77,9 +79,24 @@ class AuthController extends GetxController {
           idToken: googleAuth.idToken,
         );
         await auth.signInWithCredential(credentials);
+        getSuccessSnackBar("Successfully logged in as ${_user.value!.email}");
       }
     } on FirebaseAuthException catch (e) {
       getErrorSnackBar('Google Login Failed', e);
+    }
+  }
+
+  void signOut() async {
+    await auth.signOut();
+  }
+
+  void forgotPassword(email) async {
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+      getSuccessSnackBar(
+          'Reset mail sent successfully. Please check your mail!');
+    } on FirebaseAuthException catch (e) {
+      getErrorSnackBar('Error', e);
     }
   }
 
@@ -88,14 +105,22 @@ class AuthController extends GetxController {
       'Error',
       '$message\n${_.message}',
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: ThemeColor.redBorder,
+      backgroundColor: ThemeColor.redTextColor,
       colorText: Colors.white,
       borderRadius: 10,
       margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
     );
   }
 
-  void signOut() async {
-    await auth.signOut();
+  getSuccessSnackBar(String message) {
+    Get.snackbar(
+      'Success',
+      message,
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: ThemeColor.greenTextColor,
+      colorText: Colors.white,
+      borderRadius: 10,
+      margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
+    );
   }
 }

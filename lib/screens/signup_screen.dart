@@ -86,7 +86,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           if (ValidController.validatePassword(
                               passwordController.text,
                               cnfPasswordController.text)) {
-                            AuthController.instance.registerUser(
+                            AuthController.instance.register(
                                   emailController.text.trim(),
                                   passwordController.text.trim(),
                                 );
