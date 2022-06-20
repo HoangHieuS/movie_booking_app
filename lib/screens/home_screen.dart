@@ -1,13 +1,17 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:movie_booking_app/controllers/auth_controller.dart';
 import 'package:movie_booking_app/utils/utils.dart';
 import 'package:movie_booking_app/widgets/widgets.dart';
+import 'screens.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -46,13 +50,18 @@ class _HomeScreenState extends State<HomeScreen> {
           child: AppBar(
             leading: Padding(
               padding: const EdgeInsets.only(left: 8, top: 8),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl: imgUrl,
-                  height: 60,
-                  width: 60,
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(const ProfileScreen());
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl: imgUrl,
+                    height: 60,
+                    width: 60,
+                  ),
                 ),
               ),
             ),
@@ -62,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Name'),
+                  Text(AuthController.instance.user!.displayName ?? 'Name'),
                   DropdownButton<String>(
                     value: city,
                     dropdownColor: ThemeColor.statusBar,
@@ -127,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const CustomCategory(categoryName: 'RECOMMENDED SEATS'),
                 const MoviesItem(),
                 const CustomCategory(
-                  categoryName: 'NEADRBY THEATRES',
+                  categoryName: 'NEARBY THEATRES',
                   isList: true,
                 ),
                 Container(
@@ -136,6 +145,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: GoogleMap(
                     mapType: MapType.normal,
                     initialCameraPosition: _kGooglePlex,
+                    gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+                      Factory<OneSequenceGestureRecognizer>(
+                          () => EagerGestureRecognizer())
+                    },
                     onMapCreated: (GoogleMapController controller) {
                       // _controller.complete(controller);
                     },
