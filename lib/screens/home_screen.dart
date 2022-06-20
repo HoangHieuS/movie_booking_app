@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:movie_booking_app/controllers/auth_controller.dart';
 import 'package:movie_booking_app/utils/utils.dart';
 import 'package:movie_booking_app/widgets/widgets.dart';
@@ -15,10 +18,23 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String city = cities[0];
+  final Completer<GoogleMapController> _controller = Completer();
+
+  static const CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.08574965515137),
+    zoom: 14.4746,
+  );
+
+  static const CameraPosition _kLake = CameraPosition(
+    bearing: 192.8334901395799,
+    target: LatLng(37.432962653311274, -122.08832357078792),
+    tilt: 59.440717697143555,
+    zoom: 19.151926040649414,
+  );
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: ThemeColor.statusBar));
     String? imgUrl = AuthController.instance.user!.photoURL;
@@ -46,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Name'),
+                  const Text('Name'),
                   DropdownButton<String>(
                     value: city,
                     dropdownColor: ThemeColor.statusBar,
@@ -87,47 +103,61 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-        body: Container(
+        body: SizedBox(
           height: size.height,
           width: size.width,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: size.height * 0.2,
-                width: size.width,
-                color: Colors.red,
-                child: PageView.builder(
-                  itemCount: 3,
-                  itemBuilder: (_, index) {
-                    return CustomSlider(currentIndex: index);
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20, left: 20),
-                child: Text(
-                  'SEAT CATEGORIES',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black.withOpacity(0.8),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: size.height * 0.2,
+                  width: size.width,
+                  color: Colors.red,
+                  child: PageView.builder(
+                    itemCount: 3,
+                    itemBuilder: (_, index) {
+                      return CustomSlider(currentIndex: index);
+                    },
                   ),
                 ),
-              ),
-              const ListMenu(),
-              Padding(
-                padding: const EdgeInsets.only(top: 20, left: 20),
-                child: Text(
-                  'RECOMMENDED SEATS',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black.withOpacity(0.8),
+                const CustomCategory(categoryName: 'SEAT CATEGORIES'),
+                const ListMenu(),
+                const CustomCategory(categoryName: 'RECOMMENDED SEATS'),
+                const MoviesItem(),
+                const CustomCategory(
+                  categoryName: 'NEADRBY THEATRES',
+                  isList: true,
+                ),
+                Container(
+                  height: size.height * 0.2,
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: GoogleMap(
+                    mapType: MapType.normal,
+                    initialCameraPosition: _kGooglePlex,
+                    onMapCreated: (GoogleMapController controller) {
+                      // _controller.complete(controller);
+                    },
+                    zoomControlsEnabled: false,
                   ),
                 ),
-              ),
-              const MoviesItem(),
-            ],
+                const CustomCategory(
+                  categoryName: 'EVENTS',
+                  isList: true,
+                  isMovie: true,
+                  svgUrl: 'assets/icons/spotlights.svg',
+                ),
+                ListItem(models: events),
+                const CustomCategory(
+                  categoryName: 'PLAYS',
+                  isList: true,
+                  isMovie: true,
+                  svgUrl: 'assets/icons/theater_masks.svg',
+                ),
+                ListItem(models: plays),
+              ],
+            ),
           ),
         ),
       ),

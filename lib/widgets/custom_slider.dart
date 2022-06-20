@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_booking_app/utils/utils.dart';
 
 class CustomSlider extends StatelessWidget {
-  final currentIndex;
+  final int currentIndex;
 
   const CustomSlider({Key? key, this.currentIndex = 0}) : super(key: key);
 

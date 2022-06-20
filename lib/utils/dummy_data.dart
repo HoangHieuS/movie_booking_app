@@ -50,6 +50,60 @@ List<MovieModel> movies = [
   ),
 ];
 
+List<EventModel> events = [
+  EventModel(
+    title: "Bigil",
+    description: "description",
+    bannerUrl: "assets/events/event1.png",
+    date: "date",
+  ),
+  EventModel(
+    title: "Kaithi",
+    description: "description",
+    bannerUrl: "assets/events/event2.png",
+    date: "date",
+  ),
+  EventModel(
+    title: "Asuran",
+    description: "description",
+    bannerUrl: "assets/events/event3.png",
+    date: "date",
+  ),
+  EventModel(
+    title: "Sarkar",
+    description: "description",
+    bannerUrl: "assets/events/event4.png",
+    date: "date",
+  ),
+];
+
+List<EventModel> plays = [
+  EventModel(
+    title: "Bigil",
+    description: "description",
+    bannerUrl: "assets/plays/play1.png",
+    date: "date",
+  ),
+  EventModel(
+    title: "Kaithi",
+    description: "description",
+    bannerUrl: "assets/plays/play2.png",
+    date: "date",
+  ),
+  EventModel(
+    title: "Asuran",
+    description: "description",
+    bannerUrl: "assets/plays/play3.png",
+    date: "date",
+  ),
+  EventModel(
+    title: "Sarkar",
+    description: "description",
+    bannerUrl: "assets/plays/play4.png",
+    date: "date",
+  ),
+];
+
 List<String> cities = [
   'Vung Tau',
   'London',
