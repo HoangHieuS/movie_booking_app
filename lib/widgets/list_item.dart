@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_booking_app/models/models.dart';
+import '../models/models.dart';
+import '../widgets/widgets.dart';
 
 class ListItem extends StatelessWidget {
   final List<EventModel> models;
@@ -19,38 +20,7 @@ class ListItem extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: models.length,
         itemBuilder: (_, i) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 10, left: 20, right: 10),
-            child: GestureDetector(
-              onTap: () {
-                debugPrint(models[i].title);
-              },
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      models[i].bannerUrl,
-                      height: 150,
-                      width: 120,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    models[i].title,
-                    style: TextStyle(
-                        fontSize: 12, color: Colors.black.withOpacity(0.6)),
-                  ),
-                  Text(
-                    models[i].description,
-                    style: const TextStyle(fontSize: 10),
-                  ),
-                ],
-              ),
-            ),
-          );
+          return ItemBlock(model: models[i]);
         },
       ),
     );

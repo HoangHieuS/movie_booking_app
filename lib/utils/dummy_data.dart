@@ -1,5 +1,5 @@
-import 'package:movie_booking_app/models/models.dart';
-import 'package:movie_booking_app/utils/utils.dart';
+import '../models/models.dart';
+import '../utils/utils.dart';
 
 List<AdSliderModel> sliderData = [
   AdSliderModel(

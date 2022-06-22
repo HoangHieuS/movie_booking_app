@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -8,10 +7,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:movie_booking_app/controllers/auth_controller.dart';
-import 'package:movie_booking_app/utils/utils.dart';
-import 'package:movie_booking_app/widgets/widgets.dart';
-import 'screens.dart';
+import '../controllers/controllers.dart';
+import '../utils/utils.dart';
+import '../widgets/widgets.dart';
+import '../screens/screens.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -72,27 +71,28 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(AuthController.instance.user!.displayName ?? 'Name'),
-                  DropdownButton<String>(
-                    value: city,
-                    dropdownColor: ThemeColor.statusBar,
-                    isDense: true,
-                    icon: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Colors.white.withOpacity(0.7),
-                    ),
-                    items: cities
-                        .map(
-                          (e) => DropdownMenuItem<String>(
-                            value: e,
-                            child: Text(e),
+                  Obx( () =>
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(() => const SelectLocationScreen());
+                      },
+                      child: Row(
+                        children: [
+                          Text(
+                            LocationController.instance.city.value,
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.7),
+                              inherit: true,
+                              fontSize: 14,
+                            ),
                           ),
-                        )
-                        .toList(),
-                    onChanged: (st) {
-                      setState(() {
-                        city = st!;
-                      });
-                    },
+                          Icon(
+                            Icons.keyboard_arrow_down,
+                            color: Colors.white.withOpacity(0.7),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),

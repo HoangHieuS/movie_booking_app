@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
+import '../screens/screens.dart';
 import '../utils/utils.dart';
 
 class ListMenu extends StatelessWidget {
@@ -21,6 +23,7 @@ class ListMenu extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 debugPrint(menus[i].name);
+                Get.to(() => const ViewAllScreen(), arguments: menus[i],);
               },
               child: Column(
                 children: [

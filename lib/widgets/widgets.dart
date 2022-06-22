@@ -5,3 +5,4 @@ export 'list_menu.dart';
 export 'movies_item.dart';
 export 'list_item.dart';
 export 'custom_category.dart';
+export 'item_block.dart';

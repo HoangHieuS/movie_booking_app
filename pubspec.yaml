@@ -41,6 +41,9 @@ dependencies:
   get: ^4.6.5
   google_sign_in: ^5.3.3
   google_maps_flutter: ^2.1.8
+  location: ^4.4.0
+  geocoding: ^2.0.4
+  loading_overlay: ^0.3.0
 
 dev_dependencies:
   flutter_test:
