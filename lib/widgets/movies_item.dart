@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../screens/screens.dart';
 import '../widgets/widgets.dart';
 import '../utils/utils.dart';
 
@@ -15,9 +17,15 @@ class MoviesItem extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: movies.length,
         itemBuilder: (_, i) {
-          return ItemBlock(
-            model: movies[i],
-            isMovie: true,
+          return Hero(
+            tag: '${movies[i].title}$i',
+            child: ItemBlock(
+              model: movies[i],
+              isMovie: true,
+              onTap: (model) {
+                Get.to(() =>  DetailsScreen(), arguments: [movies[i], i],);
+              },
+            ),
           );
         },
       ),

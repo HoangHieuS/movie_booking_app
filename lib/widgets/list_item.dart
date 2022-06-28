@@ -20,7 +20,7 @@ class ListItem extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: models.length,
         itemBuilder: (_, i) {
-          return ItemBlock(model: models[i]);
+          return ItemBlock(model: models[i], onTap: (model) {},);
         },
       ),
     );

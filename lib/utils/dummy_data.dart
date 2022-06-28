@@ -19,6 +19,28 @@ List<MenuModel> menus = [
   MenuModel(name: "Monum", asset: "assets/icons/pyramid.svg"),
 ];
 
+List<OfferModel> offers = [
+  OfferModel(
+    title: "Wait ! Grab FREE reward",
+    description: "Book your seats and tap on the reward box to claim it.",
+    expiry: DateTime(2022, 4, 15, 12),
+    startTime: DateTime(2022, 3, 15, 12),
+    discount: 100,
+    color: ThemeColor.redTextColor,
+    gradientColor: ThemeColor.redGiftGradientColors,
+    
+  ),
+  OfferModel(
+    title: "Wait ! Grab FREE reward",
+    description: "Book your seats and tap on the reward box to claim it.",
+    expiry: DateTime(2022, 4, 15, 12),
+    startTime: DateTime(2022, 3, 15, 12),
+    discount: 100,
+    color: ThemeColor.greenTextColor,
+    gradientColor: ThemeColor.greenGiftGradientColors,
+    icon: "gift_green.svg",
+  ),
+];
 List<MovieModel> movies = [
   MovieModel(
     title: "Bigil",
@@ -113,4 +135,31 @@ List<String> cities = [
   'Sydney',
   'Ha Noi',
   'Ho Chi Minh',
+];
+
+List<CastModel> casts = [
+  CastModel(
+    movieId: "123",
+    castId: "123",
+    name: "Chadwick",
+    image: "assets/actors/chadwick.png",
+  ),
+  CastModel(
+    movieId: "123",
+    castId: "123",
+    name: "Letitia Wright",
+    image: "assets/actors/LetitiaWright.png",
+  ),
+  CastModel(
+    movieId: "123",
+    castId: "123",
+    name: "B. Jordan",
+    image: "assets/actors/b_jordan.png",
+  ),
+  CastModel(
+    movieId: "123",
+    castId: "123",
+    name: "Lupita Nyong",
+    image: "assets/actors/lupita_nyong.png",
+  ),
 ];

@@ -6,3 +6,6 @@ export 'movies_item.dart';
 export 'list_item.dart';
 export 'custom_category.dart';
 export 'item_block.dart';
+export 'movie_offer.dart';
+export 'movie_review.dart';
+export 'movie_cast.dart';

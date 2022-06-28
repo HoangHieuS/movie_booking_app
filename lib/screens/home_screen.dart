@@ -36,6 +36,13 @@ class _HomeScreenState extends State<HomeScreen> {
   );
 
   @override
+  void initState() {
+    SharedPrefController.getLocation()
+        .then((value) => city = value);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     SystemChrome.setSystemUIOverlayStyle(
@@ -71,8 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(AuthController.instance.user!.displayName ?? 'Name'),
-                  Obx( () =>
-                    GestureDetector(
+                  Obx(
+                    () => GestureDetector(
                       onTap: () {
                         Get.to(() => const SelectLocationScreen());
                       },
@@ -168,7 +175,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   isMovie: true,
                   svgUrl: 'assets/icons/theater_masks.svg',
                 ),
-                ListItem(models: plays),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: ListItem(models: plays),
+                ),
               ],
             ),
           ),
