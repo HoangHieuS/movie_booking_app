@@ -46,6 +46,7 @@ dependencies:
   loading_overlay: ^0.3.0
   shared_preferences: ^2.0.15
   dotted_border: ^2.0.0+2
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

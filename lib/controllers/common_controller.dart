@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../utils/utils.dart';
+
 class CommonController extends GetxController
     with GetSingleTickerProviderStateMixin {
   static CommonController instance = Get.find();
   late TabController tabController;
   late List<Tab> tabs;
+  late RxString screen;
 
   final tabList = ['Now showing', 'Coming soon', 'Exclusive'];
-  final PageController pageController = PageController(keepPage: false);
+  final PageController pageController = PageController(keepPage: false, initialPage: 0,);
   
   @override
   void onInit() {
@@ -20,6 +23,7 @@ class CommonController extends GetxController
     );
     tabController.animateTo(0);
     tabs = tabList.map((e) => Tab(text: e)).toList();
+    screen = screens[0].obs;
     super.onInit();
   }
 
@@ -30,7 +34,7 @@ class CommonController extends GetxController
     super.dispose();
   }
 
-  updatePage(int index) {
+  updatePage(int index) async {
     pageController.animateToPage(
       index,
       duration: const Duration(milliseconds: 300),
@@ -41,6 +45,11 @@ class CommonController extends GetxController
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeIn,
     );
+    
+  }
+
+  updateScreen(String screen) {
+    this.screen = screen.obs;
     update();
   }
 }

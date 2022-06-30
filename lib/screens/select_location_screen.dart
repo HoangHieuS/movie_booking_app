@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:loading_overlay/loading_overlay.dart';
-import 'package:movie_booking_app/controllers/controllers.dart';
-import 'package:movie_booking_app/screens/home_screen.dart';
-
+import '../controllers/controllers.dart';
+import '../screens/home_screen.dart';
 import '../utils/utils.dart';
 
 class SelectLocationScreen extends StatefulWidget {

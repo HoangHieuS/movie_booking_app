@@ -6,3 +6,4 @@ export 'profile_screen.dart';
 export 'select_location_screen.dart';
 export 'view_all_screen.dart';
 export 'details_screen.dart';
+export 'list_cinema_screen.dart';

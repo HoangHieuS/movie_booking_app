@@ -24,13 +24,13 @@ class _HomeScreenState extends State<HomeScreen> {
   final Completer<GoogleMapController> _controller = Completer();
 
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.08574965515137),
+    target: LatLng(10.7721649, 106.7035503),
     zoom: 14.4746,
   );
 
   static const CameraPosition _kLake = CameraPosition(
     bearing: 192.8334901395799,
-    target: LatLng(37.432962653311274, -122.08832357078792),
+    target: LatLng(10.771412, 106.708256),
     tilt: 59.440717697143555,
     zoom: 19.151926040649414,
   );

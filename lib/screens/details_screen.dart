@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:movie_booking_app/screens/list_cinema_screen.dart';
 import '../widgets/widgets.dart';
 import '../utils/utils.dart';
 
@@ -33,7 +34,9 @@ class DetailsScreen extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.to(() =>  ListCinemaScreen(model: model));
+          },
           style: ElevatedButton.styleFrom(
             primary: ThemeColor.splash,
             elevation: 0,

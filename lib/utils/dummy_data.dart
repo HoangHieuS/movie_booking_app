@@ -127,14 +127,14 @@ List<EventModel> plays = [
 ];
 
 List<String> cities = [
-  'Vung Tau',
-  'London',
-  'New York',
-  'Paris',
-  'Tokyo',
-  'Sydney',
-  'Ha Noi',
   'Ho Chi Minh',
+  'Ha Noi',
+  'Vung Tau',
+  'Da Nang',
+  'Hai Phong',
+  'Nha Trang',
+  'Can Tho',
+  'Bien Hoa',
 ];
 
 List<CastModel> casts = [
@@ -163,3 +163,38 @@ List<CastModel> casts = [
     image: "assets/actors/lupita_nyong.png",
   ),
 ];
+
+List<TheatreModel> theatres = [
+  TheatreModel(id: "1", name: "CGV Vincom Center Landmark 81"),
+  TheatreModel(id: "2", name: "BHD Star Bitexco"),
+  TheatreModel(id: "3", name: "Lotte Cinema Cantavil"),
+  TheatreModel(id: "4", name: "Galaxy Cinema - Nguyen Du"),
+];
+
+List<String> facilityAsset = [
+  "assets/icons/cancel.svg",
+  "assets/icons/parking.svg",
+  "assets/icons/cutlery.svg",
+  "assets/icons/rocking_horse.svg",
+];
+
+List<String> screens = [
+  "3D",
+  "2D",
+];
+
+// final seatLayout = SeatLayoutModel(
+//     rows: 10,
+//     cols: 11,
+//     seatTypes: [
+//       {"title": "King", "price": 120.0, "status": "Filling Fast"},
+//       {"title": "Queen", "price": 100.0, "status": "Available"},
+//       {"title": "Jack", "price": 80.0, "status": "Available"},
+//     ],
+//     theatreId: 123,
+//     gap: 2,
+//     gapColIndex: 5,
+//     isLastFilled: true,
+//     rowBreaks: [5, 3, 2]);
+
+final List<int> s = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
