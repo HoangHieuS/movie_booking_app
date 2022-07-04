@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:movie_booking_app/screens/seat_selection_screen.dart';
 
 import '../controllers/controllers.dart';
 import '../models/models.dart';
@@ -34,6 +35,7 @@ class _ListCinemaScreenState extends State<ListCinemaScreen> {
   @override
   void initState() {
     calendarController = Get.put(CalendarController());
+    Get.put(SeatSelectionController());
     super.initState();
   }
 
@@ -69,7 +71,15 @@ class _ListCinemaScreenState extends State<ListCinemaScreen> {
               padding: EdgeInsets.only(
                   bottom: index != theatres.length - 1 ? 20 : 0),
               child: TheatreBlock(
-                model: theatres[index], onTimeTap: (index) {},
+                model: theatres[index],
+                onTimeTap: (index) {
+                  Get.to(
+                    () => SeatSelectionScreen(
+                      theatreModel: theatres[index],
+                      movieModel: widget.model,
+                    ),
+                  );
+                },
               ),
             );
           },
@@ -210,10 +220,19 @@ class TheatreSearchDelegate extends SearchDelegate {
       itemCount: suggestionList.length,
       itemBuilder: (_, index) {
         return Container(
-          padding: EdgeInsets.only(bottom: index != suggestionList.length - 1 ? 20 : 0),
+          padding: EdgeInsets.only(
+              bottom: index != suggestionList.length - 1 ? 20 : 0),
           child: TheatreBlock(
             model: suggestionList[index],
-          onTimeTap: (index) {}), 
+            onTimeTap: (index) {
+              Get.to(
+                () => SeatSelectionScreen(
+                  theatreModel: suggestionList[index],
+                  movieModel: model,
+                ),
+              );
+            },
+          ),
         );
       },
     );

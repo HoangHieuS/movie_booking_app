@@ -13,3 +13,6 @@ export 'list_menu.dart';
 export 'item_block.dart';
 export 'theatre_block.dart';
 export 'facilities_bottom_sheet.dart';
+export 'no_of_seat.dart';
+export 'seat_type.dart';
+export 'seat_layout.dart';

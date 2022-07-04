@@ -24,10 +24,11 @@ class TheatreModel {
     this.fullAddress = "B1 st floor Vincom Center Mall Landmark 81, Dien Bien Phu Street, Binh Thanh District, Ho Chi Minh City, Viet Nam ",
     this.timings = const [
       "10:00 AM",
-      "1:30 PM",
-      "6:30 PM",
-      "9:30 PM",
-      "12:30 AM",
+      "12:30 PM",
+      "3:00 PM",
+      "5:30 PM",
+      "8:00 PM",
+      "10:30 PM",
     ],
     this.avalableScreens = const [
       "3D",

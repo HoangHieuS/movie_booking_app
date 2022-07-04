@@ -42,6 +42,13 @@ List<OfferModel> offers = [
   ),
 ];
 List<MovieModel> movies = [
+   MovieModel(
+    title: "Black Panther",
+    description: "description",
+    actors: ["actor a", "actor b"],
+    like: 100,
+    bannerUrl: "assets/movies/movie5.png",
+  ),
   MovieModel(
     title: "Bigil",
     description: "description",
@@ -70,6 +77,7 @@ List<MovieModel> movies = [
     like: 84,
     bannerUrl: "assets/movies/movie4.png",
   ),
+ 
 ];
 
 List<EventModel> events = [
@@ -169,6 +177,8 @@ List<TheatreModel> theatres = [
   TheatreModel(id: "2", name: "BHD Star Bitexco"),
   TheatreModel(id: "3", name: "Lotte Cinema Cantavil"),
   TheatreModel(id: "4", name: "Galaxy Cinema - Nguyen Du"),
+  TheatreModel(id: "5", name: "DDC - Tran Hung Dao"),
+  TheatreModel(id: "6", name: "Cinestar - Nguyen Trai"),
 ];
 
 List<String> facilityAsset = [
@@ -183,18 +193,18 @@ List<String> screens = [
   "2D",
 ];
 
-// final seatLayout = SeatLayoutModel(
-//     rows: 10,
-//     cols: 11,
-//     seatTypes: [
-//       {"title": "King", "price": 120.0, "status": "Filling Fast"},
-//       {"title": "Queen", "price": 100.0, "status": "Available"},
-//       {"title": "Jack", "price": 80.0, "status": "Available"},
-//     ],
-//     theatreId: 123,
-//     gap: 2,
-//     gapColIndex: 5,
-//     isLastFilled: true,
-//     rowBreaks: [5, 3, 2]);
+final seatLayout = SeatLayoutModel(
+    rows: 10,
+    cols: 11,
+    seatTypes: [
+      {"title": "King", "price": 120.0, "status": "Filling Fast"},
+      {"title": "Queen", "price": 100.0, "status": "Available"},
+      {"title": "Jack", "price": 80.0, "status": "Available"},
+    ],
+    theatreId: 123,
+    gap: 2,
+    gapColIndex: 5,
+    isLastFilled: true,
+    rowBreaks: [5, 3, 2]);
 
 final List<int> s = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
