@@ -25,9 +25,9 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
     final SeatSelectionController seatController = Get.find();
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5FA),
-      appBar: AppBar(
-        elevation: 0,
-        title: Text(widget.movieModel.title),
+      appBar: customAppBar(
+        toggle: seatController.isSeatSelection,
+        controller: seatController,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,17 +45,43 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: bottomBar((value) => seatController.isSeatSelection),
+      bottomNavigationBar: bottomBar(toggle: seatController.isSeatSelection, controller: seatController,),
     );
   }
 
-  Widget bottomBar(Function(bool) toggle) {
+  PreferredSizeWidget customAppBar({
+    required Function(bool) toggle,
+    required SeatSelectionController controller,
+  }) {
+    return AppBar(
+      elevation: 0,
+      title: Text(widget.movieModel.title),
+      actions: [
+        TextButton(
+          onPressed: () {
+            toggle(false);
+          },
+          child: Obx(
+            () => Text(
+              '${controller.noOfSeats < 0 ? 0 : controller.noOfSeats} Seats',
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget bottomBar({
+    required Function(bool) toggle,
+    required SeatSelectionController controller,
+  }) {
     return BottomAppBar(
       child: SizedBox(
         height: AppBar().preferredSize.height,
         child: ElevatedButton(
           onPressed: () {
-            toggle(!SeatSelectionController.instance.isSeatSelection.value);
+            toggle(true);
           },
           style: ElevatedButton.styleFrom(
             elevation: 0,
@@ -63,10 +89,12 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
             shape:
                 const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
           ),
-          child: const Center(
-            child: Text(
-              'Select Seats',
-              style: TextStyle(fontSize: 18),
+          child: Obx(
+            () => Center(
+              child: Text(
+                controller.isSeatSelection.value ? 'Pay ${controller.seatPrice.value}' : 'Select Seats',
+                style: const TextStyle(fontSize: 18),
+              ),
             ),
           ),
         ),
@@ -74,7 +102,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
     );
   }
 
-  Widget noOfSeatSelection(SeatSelectionController seatController) {
+  Widget noOfSeatSelection(SeatSelectionController controller) {
     return Expanded(
       child: Container(
         height: double.maxFinite,
@@ -94,15 +122,15 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                 child: SvgPicture.asset(
-                  'assets/icons/${seatController.getAsset()}',
+                  'assets/icons/${controller.getAsset()}',
                   height: 100,
                   fit: BoxFit.fill,
                 ),
               ),
             ),
-            NoOfSeat(onTap: seatController.noOfSeats),
+            NoOfSeat(onTap: controller.noOfSeats),
             const SizedBox(height: 10),
-            SeatType(onTap: seatController.seatType),
+            SeatType(onTap: controller.seatType),
           ],
         ),
       ),

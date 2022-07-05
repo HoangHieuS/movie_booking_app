@@ -8,6 +8,10 @@ class SeatSelectionController extends GetxController {
   RxInt seatType = initialValue.obs;
   RxBool isSeatSelection = false.obs;
 
+  RxList selectedSeats = [].obs; 
+  RxList seatPrices = [].obs; 
+  RxDouble seatPrice = 0.0.obs;
+
   @override
   void onReady() {
     super.onReady();
